@@ -1,0 +1,15 @@
+openapi: 3.0.3
+
+info:
+    version: 0.0.1
+    title: Api - First Book Library
+    description: The Book library service
+
+tags:
+    - name: "Library"
+
+paths:
+    /books:
+        $ref: './books.yaml'
+    /books/{id}:
+        $ref: './books-id.yaml'

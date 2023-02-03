@@ -1,0 +1,67 @@
+components:
+    responses:
+        BookNotFound:
+            description: A book with a given id has not been found
+            content: { }
+        BadRequest:
+            description: Bad request
+            content: { }
+    schemas:
+        Book:
+            description: A Book entity represents a single book
+            type: object
+            properties:
+                id:
+                    type: integer
+                    format: int64
+                title:
+                    description: A title of the book
+                    type: string
+                    x-constraints: "@Capitalized(required = false)"
+                author:
+                    description: An author of the book
+                    type: string
+                numberOfPages:
+                    description: A number of pages of the book
+                    type: integer
+                    format: int64
+                availabilityStatus:
+                    description: An availability status of a book
+                    type: string
+                    enum:
+                        - AVAILABLE
+                        - BORROWED
+                        - LOST
+                    x-constraints: "@ValidAvailabilityStatus(regexp = \"AVAILABLE|BORROWED|LOST\")"
+        Reader:
+            description: A person able to borrow books
+            type: object
+            properties:
+                id:
+                    type: integer
+                    format: int64
+                firstName:
+                    type: string
+                lastName:
+                    type: string
+                address:
+                    $ref: "#/components/schemas/Address"
+                books:
+                    type: array
+                    items:
+                        $ref: "#/components/schemas/Book"
+        Address:
+            description: An address of the Reader
+            type: object
+            properties:
+                id:
+                    type: integer
+                    format: int64
+                street:
+                    type: string
+                houseNumber:
+                    type: string
+                city:
+                    type: string
+                postalCode:
+                    type: string

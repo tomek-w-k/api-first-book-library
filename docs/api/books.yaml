@@ -1,0 +1,40 @@
+post:
+    tags:
+        - book
+    summary: Add a new book to the library
+    description: Add a new book to the library
+    operationId: addBook
+    requestBody:
+        required: true
+        content:
+            application/json:
+                schema:
+                    $ref: './components.yaml#/components/schemas/Book'
+    responses:
+        '201':
+            description: default response, returning the new Book
+            content:
+                application/json:
+                    schema:
+                        $ref: './components.yaml#/components/schemas/Book'
+        '400':
+            description: Invalid input
+get:
+    tags:
+        - "Library"
+    description: Returns all Book entities
+    operationId: getAllBooks
+    responses:
+        "200":
+            description: At least one Book entity exists
+            content:
+                application/json:
+                    schema:
+                        type: array
+                        items:
+                            $ref: './components.yaml#/components/schemas/Book'
+        "204":
+            description: Any Book entity does not exist
+            content: {}
+        "400":
+            $ref: './components.yaml#/components/responses/BadRequest'

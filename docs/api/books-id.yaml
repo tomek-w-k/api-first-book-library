@@ -1,0 +1,23 @@
+get:
+    tags:
+        - "Library"
+    description: Returns a Book entity with a given id
+    operationId: getBookById
+    parameters:
+        - name: id
+          in: path
+          description: An id of the Book that needs to be fetched
+          required: true
+          schema:
+              type: integer
+    responses:
+        "200":
+            description: A Book entity with a given id exists
+            content:
+                application/json:
+                    schema:
+                        $ref: './components.yaml#/components/schemas/Book'
+        "404":
+            $ref: './components.yaml#/components/responses/BookNotFound'
+        "400":
+            $ref: './components.yaml#/components/responses/BadRequest'
